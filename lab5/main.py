@@ -1,4 +1,4 @@
-from vychmat.lab5.solution import Solution
+from lab5.solution import Solution
 
 if __name__ == '__main__':
     funcs = '1) y\' = sin(x)\n' \

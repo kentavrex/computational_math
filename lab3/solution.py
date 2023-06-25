@@ -1,7 +1,7 @@
 from typing import Callable
 
-from vychmat.lab3.helpers import calculate_integral, get_value, get_sign, check_the_break_point
-from vychmat.lab3.tests import Result
+from lab3.helpers import calculate_integral, get_value, get_sign, check_the_break_point
+from lab3.tests import Result
 
 
 class Solution(Result):

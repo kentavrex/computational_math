@@ -1,6 +1,6 @@
 import math
 
-from vychmat.lab6.tests import get_function
+from lab6.tests import get_function
 
 
 class Solution:

@@ -1,5 +1,5 @@
-from vychmat.lab4.solution import Solution
-from vychmat.lab4.tests import get_function_dot
+from lab4.solution import Solution
+from lab4.tests import get_function_dot
 
 if __name__ == '__main__':
     var = str(input("Do you want to enter the data manually [y/n]:"))

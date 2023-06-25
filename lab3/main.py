@@ -1,6 +1,6 @@
 from solution import Solution
-from vychmat.lab3.helpers import check_the_break_point, get_response
-from vychmat.lab3.tests import Result
+from lab3.helpers import check_the_break_point, get_response
+from lab3.tests import Result
 
 
 class Examples:

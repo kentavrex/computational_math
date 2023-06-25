@@ -1,4 +1,4 @@
-from vychmat.lab5.tests import get_function
+from lab5.tests import get_function
 
 
 class Solution:

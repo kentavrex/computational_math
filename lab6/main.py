@@ -1,4 +1,4 @@
-from vychmat.lab6.solution import Solution
+from lab6.solution import Solution
 
 
 if __name__ == '__main__':
