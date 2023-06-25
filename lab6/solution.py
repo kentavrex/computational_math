@@ -1,56 +1,74 @@
 import math
 
-from lab6.tests import get_function
+from lab6.tests import get_function, first_function_derivative, first_function_derivative_2
 
 
 class Solution:
+    @staticmethod
+    def newton_method(f, df, x0, eps):
+        """Ищет решение f(x)=0 методом Ньютона
+
+        f - функция от x, для которой ищем решение
+        df - производная по x от f
+        x0 - начальная точка
+        eps - погрешность
+
+        returns:
+        x, для которого abs(f(x)) < eps
+        """
+
+        while True:
+            delta = abs(f(x0))
+            if delta < eps:
+                return x0
+            x0 = x0 - f(x0) / df(x0)
 
     @staticmethod
-    def solveByMilne(f, epsilon, a, y_a, b):    # noqa
-        """Milne multi-step method of solving Koshi task"""
-        func = get_function(f)
-        import matplotlib.pyplot as plt
-        import numpy as np
+    def shoot(fun_y2, y0, ksi, x0=0.0, x1=1.0, n=1000):
+        """Рассчитывает один "выстрел" по методу стрельбы
 
-        a, b = 0.0, 1.0
-        A, B = 1.0, math.e
-        n = 5
-        h = (b - a) / n
-        D0, D1 = A + h, h
+        fun_y2 - вторая производная функции y
+        y0 - y(x0)
+        ksi - "угол выстрела", т.е. наклон касательной к y, т.е. y(x0)
+        x0, x1 - диапазон x, на котором производится расчет
+        n - количество блоков, на котороые разбивается диапазон (x0, x1) для расчета
 
-        y = [[A, D0], [0, D1]]
+        returns:
+        конечное значение пули после выстрела, т.е. y(x1)
 
-        def f(x):
-            return 3 * (math.e ** x)
+        """
+        x = x0
+        y = y0
+        y1 = ksi
 
-        def get_c1():
-            global n
-            return (B - y[0][n]) / y[1][n]
-
-        def get_solv_y_i(i):
-            return y[0][i] + get_c1() * y[1][i]
-
-        x = np.linspace(a, b, n + 1)
-
-        def div(a, b):
-            return a / b
-
-        for i in range(1, n):
-            y[0].append(
-                div(
-                    (h ** 2 * f(x[i]) - (1.0 - (h / 2) * p(x[i])) * y[0][i - 1] - (h ** 2 * q(x[i]) - 2) * y[0][i]),
-                    1 + h / 2 * p(x[i])
-                )
-            )
-            y[1].append(
-                div(
-                    -(1 - h / 2 * p(x[i])) * y[1][i - 1] - (h ** 2 * q(x[i]) - 2) * y[1][i],
-                    1 + h / 2 * p(x[i])
-                )
-            )
-
-        plt.plot(x, [get_solv_y_i(i) for i in range(n + 1)])
-        plt.show()
-
+        delta = (x1 - x0) / n
         for i in range(n):
-            print(x[i], get_solv_y_i(i))
+            x += delta
+            y += delta * y1
+            y1 += delta * fun_y2(x, y, y1)
+        return y
+
+    @staticmethod
+    def shooting_method(f, x0, x1, c1, c2, eps=1e-3):
+        """Поиск решение ОДУ методом стрельбы
+
+        fun_ode(x,y,y1) - p(x), в выражении если y''=p(x,y,y')
+        (x0,y0) - начальная точка
+        (x1,y1) - конечная точка
+        1e-3 - погрешность
+
+        return:
+        угол стрельбы, y'(x0)
+        """
+        func = get_function(f)
+        func_derivative_2 = first_function_derivative_2
+        y0 = func(x0, c1=c1, c2=c2)
+        y1 = func(x1, c1=c1, c2=c2)
+
+        def F(ksi):
+            return Solution.shoot(func_derivative_2, y0, ksi, x0, x1) - y1
+
+        def dF(ksi):
+            return F(ksi + eps) - F(ksi) / eps
+
+        return Solution.newton_method(F, dF, x0, eps)
