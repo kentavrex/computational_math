@@ -1,12 +1,12 @@
 import math
 
-from lab6.tests import get_function, first_function_derivative, first_function_derivative_2
+from lab6.tests import get_function, first_function_derivative_2
 
 
 class Solution:
     @staticmethod
     def newton_method(f, df, x0, eps):
-        """Ищет решение f(x)=0 методом Ньютона
+        """Ищет решение f(x)=0 методом Ньютона (метод касательных для решения нелинейных уравнений)
 
         f - функция от x, для которой ищем решение
         df - производная по x от f
@@ -41,11 +41,11 @@ class Solution:
         y = y0
         y1 = ksi
 
-        delta = (x1 - x0) / n
+        step = (x1 - x0) / n
         for i in range(n):
-            x += delta
-            y += delta * y1
-            y1 += delta * fun_y2(x, y, y1)
+            x += step
+            y += step * y1
+            y1 += step * fun_y2(x, y, y1)
         return y
 
     @staticmethod

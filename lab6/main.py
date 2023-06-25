@@ -12,8 +12,7 @@ if __name__ == '__main__':
     print("c1=", c1)
     print("c2=", c2)
 
-    x0 = 0.0
-    x1 = 1.0
+    x0, x1 = 0.0, 1.0   # Концы отрезка
 
     calculated_ksi = Solution.shooting_method(f=f, x0=x0, x1=x1, c1=c1, c2=c2)
 
