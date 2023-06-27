@@ -1,9 +1,9 @@
 from lab5.solution import Solution
 
 if __name__ == '__main__':
-    funcs = '1) y\' = sin(x)\n' \
-            '2) y\' = (x * y) / 2\n' \
-            '3) y\' = x - y + 3\n'
+    funcs = '1) y\' = (x / y) * 4\n' \
+            '2) y\' = cos(x)\n' \
+            '3) y\' = x - y + 7'
     print(funcs)
     f = int(input("Func number: ").strip())
     epsilon = float(input("Epsilon: ").strip())

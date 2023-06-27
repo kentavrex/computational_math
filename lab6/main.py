@@ -1,28 +1,15 @@
+from lab6 import tests
 from lab6.solution import Solution
-from lab6.tests import first_function_derivative
 
 if __name__ == '__main__':
-    funcs = '1) x ** 6 / 30 + c1 * x + c2'
-    print(funcs)
-    f = int(input("Func number: ").strip())
+    print(tests.get_equations())
+    f_num = 1
+    a = float(input("Enter a: "))
+    ya = float(input("Enter y(a): "))
+    b = float(input("Enter b: "))
+    yb = float(input("Enter y(b): "))
+    eps = float(input("Enter eps: "))
 
-    # Для любых c1 и c2 не должен срабатывать assert
-    c1 = 1
-    c2 = 1
-    print("c1=", c1)
-    print("c2=", c2)
+    y_numerical = Solution.shooting_method(f_num=f_num, a=a, ya=ya, b=b, yb=yb, eps=eps)
+    Solution.draw(a=a, b=b, y_numerical=y_numerical, f_num=f_num, ya=ya, yb=yb)
 
-    x0, x1 = 0.0, 1.0   # Концы отрезка
-
-    calculated_ksi = Solution.shooting_method(f=f, x0=x0, x1=x1, c1=c1, c2=c2)
-
-    ksi = first_function_derivative(x0, c1)
-
-    print("ksi=", ksi)
-    print("расчетный ksi=", calculated_ksi)
-    assert abs(calculated_ksi - ksi) < 1e-3, "разница должна быть мала для любых c1 и c2"
-
-    # c1= 1
-    # c2= 1
-    # ksi= 1.0
-    # расчетный ksi= 0.9999925196666988

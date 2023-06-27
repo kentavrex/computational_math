@@ -1,7 +1,40 @@
-from lab5.tests import get_function
+from matplotlib import pyplot as plt
+
+from lab5.tests import get_function, const_for_first_analytical, const_for_second_analytical, const_for_third_analytical, analytical_first, analytical_second, analytical_third
+
 
 
 class Solution:
+    @staticmethod
+    def get_analytical_and_const(n: int):
+        if n == 1:
+            return analytical_first, const_for_first_analytical
+        elif n == 2:
+            return analytical_second, const_for_second_analytical
+        elif n == 3:
+            return analytical_third, const_for_third_analytical
+
+    @staticmethod
+    def get_analytical_solve(f, y0, x0, x1) -> tuple[list[float], list[[float]]]:
+        h = 0.1
+        func, const_func = Solution.get_analytical_and_const(f)
+        c = const_func(x0, y0)
+        list_x = [x0]
+        list_y = [func(x0, y0, c)]
+
+        x = x0 + h
+        list_x.append(round(x, 4))
+        y = func(list_x[-1], list_y[-1], c)
+        list_y.append(y)
+
+        while x < x1:   # проходимся по отрезку
+            list_x.append(round(x, 4))
+            y = func(list_x[-1], list_y[-1], c)
+            x += h
+            list_y.append(y)
+
+        return list_x, list_y
+
     @staticmethod
     def __runge_kutt_method(
             func, x0: float, y0: float, h: float
@@ -34,9 +67,21 @@ class Solution:
         return x_axis, y_axis
 
     @staticmethod
+    def make_graphic(f, x0, x1, x_axis, y_axis, y0) -> None:
+        plt.plot(x_axis, y_axis, "k", label='Численное решение')
+        plt.plot(x_axis[0], y_axis[0], 'ro', label='Начальная точка')
+        x_analytic, y_analytic = Solution.get_analytical_solve(f, y0, x0, x1)
+        plt.plot(x_analytic, y_analytic, "b", label='Аналитическое решение')
+        # Строим график аналитического решения, если оно задано
+        plt.legend()
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.show()
+
+    @staticmethod
     def solveByMilne(f, epsilon, a, y_a, b):    # noqa
         """Milne multi-step method of solving Koshi task"""
-        x0, y0 = a, y_a
+        x0, x1, y0 = a, b, y_a
         func = get_function(f)
         h = 0.1     # step
 
@@ -68,5 +113,7 @@ class Solution:
             x_axis.append(new_x)
             y_axis.append(y_corrected)
             new_x = x_axis[-1] + h
+
+        Solution.make_graphic(f=f, x0=x0, x1=x1, x_axis=x_axis, y_axis=y_axis, y0=y0)
 
         return y_axis[-1]
