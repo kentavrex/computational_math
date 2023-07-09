@@ -1,5 +1,5 @@
-from camputational_approximation.solution import Solution
-from camputational_approximation.tests import get_function_dot
+from computational_approximation.solution import Solution
+from computational_approximation.tests import get_function_dot
 
 if __name__ == '__main__':
     while True:
