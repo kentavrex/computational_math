@@ -12,10 +12,10 @@ class Solution:
     def shooting_method(a, b, ya, yb, eps, f_num):
         n = 50 * 15
         p, q, f = tests.get_pqf(f_num)
-        while True:  # Цикл для постепенного увеличения числа точек
+        while True:
             h = (b - a) / n
             x = np.linspace(a, b, n + 1)
-            y = [[ya, ya + h], [0, h]]  # Инициация списков для хранения значений y0 и y1
+            y = [[ya, ya + h], [0, h]]
             for i in range(1, n):
                 y[0].append(
                     (
