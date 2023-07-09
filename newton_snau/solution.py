@@ -6,7 +6,7 @@ from helpers import (
     calculate_derivative_partial,
     solve_by_gauss_method,
 )
-from lab2.tests_for_system_solve import get_functions
+from newton_snau.tests_for_system_solve import get_functions
 
 
 class Solution:

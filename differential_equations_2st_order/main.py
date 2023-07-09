@@ -1,5 +1,5 @@
-from lab6 import tests
-from lab6.solution import Solution
+from differential_equations_2st_order import tests
+from differential_equations_2st_order.solution import Solution
 
 if __name__ == '__main__':
     print(tests.get_equations())

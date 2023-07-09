@@ -1,6 +1,6 @@
 from solution import Solution
-from lab3.helpers import check_the_break_point, get_response
-from lab3.tests import Result
+from computational_integration.helpers import check_the_break_point, get_response
+from computational_integration.tests import Result
 
 
 class Examples:

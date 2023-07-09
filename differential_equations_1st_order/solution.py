@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 
-from lab5.tests import get_function, const_for_first_analytical, const_for_second_analytical, const_for_third_analytical, analytical_first, analytical_second, analytical_third
+from differential_equations_1st_order.tests import get_function, const_for_first_analytical, const_for_second_analytical, const_for_third_analytical, analytical_first, analytical_second, analytical_third
 
 
 

@@ -1,4 +1,4 @@
-from lab5.solution import Solution
+from differential_equations_1st_order.solution import Solution
 
 if __name__ == '__main__':
     funcs = '1) y\' = (x / y) * 4\n' \

@@ -3,7 +3,7 @@ from typing import Callable
 import numpy as np
 from matplotlib import pyplot as plt
 
-from lab6 import tests
+from differential_equations_2st_order import tests
 
 
 class Solution:
